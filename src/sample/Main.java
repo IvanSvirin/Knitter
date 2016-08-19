@@ -12,6 +12,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -21,28 +22,25 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-
     @Override
     public void start(Stage primaryStage) throws Exception {
-//        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-//        primaryStage.setTitle("Knitter");
-//        primaryStage.setScene(new Scene(root, 600, 400));
-//        primaryStage.show();
-
-
+        primaryStage.setTitle("Knitter");
+        Pane pane = FXMLLoader.load(getClass().getResource("sample.fxml"));
         Group root = new Group();
-        Scene target = new Scene(root, 400, 200);
+        root.getChildren().add(pane);
+
+
+        Scene target = new Scene(root, 600, 400);
         target.setFill(Color.LIGHTGREEN);
 
-        final Text source = new Text(50, 100, "DRAG ME");
-        source.setScaleX(2.0);
-        source.setScaleY(2.0);
+        ImageView source = (ImageView) root.lookup("#firstLoop");
 
         source.setOnDragDetected(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Dragboard db = source.startDragAndDrop(TransferMode.COPY);
                 ClipboardContent content = new ClipboardContent();
-                content.putString(source.getText());
+                content.putString(source.getId());
+                content.putImage(source.getImage());
                 db.setContent(content);
                 event.consume();
             }
@@ -78,10 +76,11 @@ public class Main extends Application {
                 Dragboard db = event.getDragboard();
                 boolean success = false;
                 if (db.hasString()) {
-                    source.setX(event.getX());
-                    source.setY(event.getY());
-//                    source.setX(150);
-//                    source.setY(100);
+                    ImageView f2 = new ImageView();
+                    f2.setImage(source.getImage());
+                    f2.setX((((int) event.getX()) / (int) (source.getFitWidth())) * source.getFitWidth());
+                    f2.setY((((int) event.getY()) / (int) (source.getFitHeight())) * source.getFitHeight());
+                    root.getChildren().add(f2);
                     success = true;
                 }
                 event.setDropCompleted(success);
@@ -100,7 +99,6 @@ public class Main extends Application {
             }
         });
 
-        root.getChildren().add(source);
         primaryStage.setScene(target);
         primaryStage.show();
     }
