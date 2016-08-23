@@ -8,9 +8,9 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
 
-<Pane id="headPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<Pane id="headPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.76-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
    <children>
-      <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="600.0">
+      <MenuBar layoutY="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="1000.0">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
@@ -30,10 +30,15 @@
           </Menu>
         </menus>
       </MenuBar>
-      <TitledPane id="loopsPane" fx:id="loopsPane" layoutX="313.0" layoutY="27.0" prefHeight="279.0" prefWidth="287.0" text="Loops" />
-      <ImageView id="firstLoop" fitHeight="50.0" fitWidth="50.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+      <TitledPane id="loopsPane" fx:id="loopsPane" layoutX="713.0" layoutY="27.0" prefHeight="279.0" prefWidth="287.0" text="Loops" />
+      <ImageView id="firstLoop" fitHeight="50.0" fitWidth="50.0" layoutX="663.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@1.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="50.0" fitWidth="50.0" layoutX="599.0" layoutY="27.0" onMouseClicked="#handle" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@2.png" />
          </image>
       </ImageView>
    </children>
