@@ -25,6 +25,9 @@ import javafx.stage.Stage;
 public class Main extends Application {
     public static Scene target;
     public static Group root;
+    public static ImageView source;
+    public static ImageView firstLoop;
+    public static ImageView secondLoop;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -38,10 +41,16 @@ public class Main extends Application {
         target.setFill(Color.LIGHTGREEN);
 
 
+        firstLoop = (ImageView) root.lookup("#firstLoop");
+        secondLoop = (ImageView) root.lookup("#secondLoop");
+        source = firstLoop;
+        setDD();
 
+        primaryStage.setScene(target);
+        primaryStage.show();
+    }
 
-        ImageView source = (ImageView) root.lookup("#firstLoop");
-
+    public static void setDD() {
         source.setOnDragDetected(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 Dragboard db = source.startDragAndDrop(TransferMode.COPY);
@@ -105,11 +114,7 @@ public class Main extends Application {
                 event.consume();
             }
         });
-
-        primaryStage.setScene(target);
-        primaryStage.show();
     }
-
 
     public static void main(String[] args) {
         launch(args);
