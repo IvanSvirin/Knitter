@@ -22,6 +22,9 @@ public class Controller implements EventHandler {
         if (mouseEvent.getX() > 100) {
             source = secondLoop;
             setDD();
+        } else {
+            source = firstLoop;
+            setDD();
         }
     }
 }
