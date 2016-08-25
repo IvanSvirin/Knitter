@@ -11,9 +11,6 @@ import static sample.Main.*;
 
 
 public class Controller implements EventHandler {
-    @FXML
-    private void openLoopsPane() {
-    }
 
     @FXML
     @Override

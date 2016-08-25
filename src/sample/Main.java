@@ -11,10 +11,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.TitledPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -28,6 +30,8 @@ public class Main extends Application {
     public static ImageView source;
     public static ImageView firstLoop;
     public static ImageView secondLoop;
+    public static TitledPane loopsPane;
+    public static AnchorPane loopsAnchorPane;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -37,12 +41,17 @@ public class Main extends Application {
         root.getChildren().add(pane);
 
 
-        target = new Scene(root, 600, 400);
+        target = new Scene(root, 1000, 600);
         target.setFill(Color.LIGHTGREEN);
 
 
+//        loopsPane = (TitledPane) root.lookup("#loopsPane");
+//        loopsAnchorPane = (AnchorPane) loopsPane.lookup("#loopsAnchorPane");
+//        firstLoop = (ImageView) loopsAnchorPane.lookup("#firstLoop");
         firstLoop = (ImageView) root.lookup("#firstLoop");
+
         secondLoop = (ImageView) root.lookup("#secondLoop");
+
         source = firstLoop;
         setDD();
 
