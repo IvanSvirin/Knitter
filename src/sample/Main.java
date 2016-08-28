@@ -40,37 +40,47 @@ public class Main extends Application {
         root = new Group();
         root.getChildren().add(pane);
 
-
         target = new Scene(root, 1000, 600);
         target.setFill(Color.LIGHTGREEN);
-
 
 //        loopsPane = (TitledPane) root.lookup("#loopsPane");
 //        loopsAnchorPane = (AnchorPane) loopsPane.lookup("#loopsAnchorPane");
 //        firstLoop = (ImageView) loopsAnchorPane.lookup("#firstLoop");
         firstLoop = (ImageView) root.lookup("#firstLoop");
-
-        secondLoop = (ImageView) root.lookup("#secondLoop");
-
-        source = firstLoop;
-        setDD();
-
-        primaryStage.setScene(target);
-        primaryStage.show();
-    }
-
-    public static void setDD() {
-        source.setOnDragDetected(new EventHandler<MouseEvent>() {
+        firstLoop.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
             public void handle(MouseEvent event) {
+                source = firstLoop;
                 Dragboard db = source.startDragAndDrop(TransferMode.COPY);
                 ClipboardContent content = new ClipboardContent();
                 content.putString(source.getId());
                 content.putImage(source.getImage());
                 db.setContent(content);
                 event.consume();
+                setDD();
             }
         });
 
+        secondLoop = (ImageView) root.lookup("#secondLoop");
+        secondLoop.setOnDragDetected(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                source = secondLoop;
+                Dragboard db = source.startDragAndDrop(TransferMode.COPY);
+                ClipboardContent content = new ClipboardContent();
+                content.putString(source.getId());
+                content.putImage(source.getImage());
+                db.setContent(content);
+                event.consume();
+                setDD();
+            }
+        });
+
+        primaryStage.setScene(target);
+        primaryStage.show();
+    }
+
+    public static void setDD() {
         target.setOnDragOver(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
                 if (event.getGestureSource() != target && event.getDragboard().hasString()) {
@@ -88,13 +98,6 @@ public class Main extends Application {
                 event.consume();
             }
         });
-
-//        target.setOnDragExited(new EventHandler<DragEvent>() {
-//            public void handle(DragEvent event) {
-//                target.setFill(Color.BLACK);
-//                event.consume();
-//            }
-//        });
 
         target.setOnDragDropped(new EventHandler<DragEvent>() {
             public void handle(DragEvent event) {
@@ -117,8 +120,6 @@ public class Main extends Application {
             public void handle(DragEvent event) {
                 /* if the data was successfully moved, clear it */
                 if (event.getTransferMode() == TransferMode.COPY) {
-//                    source.setX(150);
-//                    source.setY(100);
                 }
                 event.consume();
             }
